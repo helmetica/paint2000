@@ -1,10 +1,14 @@
 <template>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" :class="[tool]"></canvas>
 </template>
 
 <script>
 export default {
     props: {
+        tool: {
+            type: String,
+            default: 'pencil'
+        },
         color: {
             type: String,
             default: 'black'
@@ -26,14 +30,14 @@ export default {
             this.isDrawing = true;
             this.context.strokeStyle = this.color;
             this.context.lineWidth = this.lineWidth;
-            // Создаем новый путь (с текущим цветом и толщиной линии) 
+            // Создаем новый путь (с текущим цветом и толщиной линии)
 	        this.context.beginPath();
 	        // Нажатием левой кнопки мыши помещаем "кисть" на холст
 	        this.context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
         },
         stopDrawing(e) {
             this.context.closePath();
-            this.isDrawing = false;	
+            this.isDrawing = false;
         },
         draw(e) {
             if (this.isDrawing == true)
@@ -41,7 +45,7 @@ export default {
                 // Определяем текущие координаты указателя мыши
                 var x = e.pageX - canvas.offsetLeft;
                 var y = e.pageY - canvas.offsetTop;
-                
+
                 // Рисуем линию до новой координаты
                 this.context.lineTo(x, y);
                 this.context.stroke();
@@ -72,9 +76,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 #canvas {
     background: white;
-    cursor: url(/src/assets/cursor/pencil.cur), auto;
+
+    &.pencil {
+        cursor: url(/src/assets/cursor/pencil.cur), auto;
+    }
+    &.brush {
+        cursor: url(/src/assets/cursor/brush.cur), auto;
+    }
 }
 </style>

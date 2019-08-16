@@ -1,15 +1,20 @@
 <template>
     <div class="toolbox">
-        <div v-for="tool in tools" :class="['toolbox-tool', tool.icon, selectedTool == tool.id ? 'active' : '']" 
+        <div v-for="tool in tools" :class="['toolbox-tool', tool.icon, selectedTool == tool.id ? 'active' : '']"
         :key=tool.id @click="onToolSelected(tool.id)" :title="tool.title"></div>
     </div>
 </template>
 
 <script>
 export default {
+    props: {
+      selectedTool: {
+        type: String,
+        default: 'pencil'
+      }
+    },
     data() {
         return {
-            selectedTool: 'pencil',
             tools: [
                 {id: 'free_select', icon: 'free-select', title: 'Free-Form Select'},
                 {id: 'select', icon: 'select', title: 'Select'},
@@ -32,7 +37,8 @@ export default {
     },
     methods: {
         onToolSelected(selectedTool) {
-            this.selectedTool = selectedTool;
+            // this.selectedTool = selectedTool;
+          this.$emit('toolChanged', selectedTool);
         }
     }
 }
@@ -45,7 +51,6 @@ export default {
     &-tool {
         width: 20px;
         height: 20px;
-        background: bda98f;
         border-top: 1.5px solid white;
         border-left: 1.5px solid white;
         border-bottom: 1.5px solid black;

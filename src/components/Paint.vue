@@ -7,10 +7,10 @@
         <Menu />
         <div class="paint-content">
             <div class="paint-leftbar">
-                <Toolbox />
+                <Toolbox :selectedTool="tool" @toolChanged="onToolChanged"/>
             </div>
             <div class="paint-canvas">
-                <Canvas :color="color" :lineWidth="lineWidth" />
+                <Canvas :tool="tool" :color="color" :lineWidth="lineWidth" />
             </div>
         </div>
         <div class="paint-bottompanel">
@@ -29,6 +29,7 @@ import ColorBox from './ColorBox.vue'
 export default {
     data() {
         return {
+            tool: 'pencil',
             color: '#ff0080',
             lineWidth: 0.5
         }
@@ -40,6 +41,19 @@ export default {
         ColorBox
     },
     methods: {
+        onToolChanged(newTool) {
+            this.tool = newTool;
+            switch (newTool) {
+                case 'pencil':
+                    this.lineWidth = 0.5;
+                    break;
+                case 'brush':
+                    this.lineWidth = 5;
+                    break;
+                default:
+                    break;
+            }
+        },
         onColorChanged(newColor) {
             this.color = newColor;
         }
