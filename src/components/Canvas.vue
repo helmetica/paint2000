@@ -31,20 +31,20 @@ export default {
             this.context.strokeStyle = this.color;
             this.context.lineWidth = this.lineWidth;
             // Создаем новый путь (с текущим цветом и толщиной линии)
-	        this.context.beginPath();
-	        // Нажатием левой кнопки мыши помещаем "кисть" на холст
-	        this.context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+            this.context.beginPath();
+            // Нажатием левой кнопки мыши помещаем "кисть" на холст
+            this.context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
         },
         stopDrawing(e) {
             this.context.closePath();
             this.isDrawing = false;
         },
         draw(e) {
-            if (this.isDrawing == true)
+            if (this.isDrawing === true)
             {
                 // Определяем текущие координаты указателя мыши
-                var x = e.pageX - canvas.offsetLeft;
-                var y = e.pageY - canvas.offsetTop;
+                let x = e.pageX - canvas.offsetLeft;
+                let y = e.pageY - canvas.offsetTop;
 
                 // Рисуем линию до новой координаты
                 this.context.lineTo(x, y);
@@ -65,9 +65,12 @@ export default {
             canvas.onmousemove = this.draw;
         },
         resize() {
-            var rect = canvas.parentNode.getBoundingClientRect();
+            let rect = canvas.parentNode.getBoundingClientRect();
             canvas.width = rect.width;
             canvas.height = rect.height;
+        },
+        clearCanvas() {
+            this.context.clearRect(0, 0, canvas.width, canvas.height);
         }
     },
     mounted() {
@@ -85,6 +88,15 @@ export default {
     }
     &.brush {
         cursor: url(/src/assets/cursor/brush.cur), auto;
+    }
+    &.pick {
+        cursor: url(/src/assets/cursor/pick.cur), auto;
+    }
+    &.fill {
+      cursor: url(/src/assets/cursor/fill.cur), auto;
+    }
+    &.magnifier {
+      cursor: url(/src/assets/cursor/zoom.cur), auto;
     }
 }
 </style>

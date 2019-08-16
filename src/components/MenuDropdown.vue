@@ -1,7 +1,7 @@
 <template>
     <div v-if="items.length" class="menu-dropdown">
-        <div class="menu-dropdown-item" 
-            v-for="item in items" 
+        <div class="menu-dropdown-item"
+            v-for="item in items"
             :key="item.id"
             @click="onItemClick(item.id)">
                 {{ item.title }}
@@ -17,6 +17,7 @@ export default {
     methods: {
         onItemClick(id) {
             console.log(id);
+            this.$emit('itemClick', id);
         }
     }
 }

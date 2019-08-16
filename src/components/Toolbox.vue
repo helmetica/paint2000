@@ -1,8 +1,15 @@
 <template>
-    <div class="toolbox">
-        <div v-for="tool in tools" :class="['toolbox-tool', tool.icon, selectedTool == tool.id ? 'active' : '']"
-        :key=tool.id @click="onToolSelected(tool.id)" :title="tool.title"></div>
+  <div class="toolbox">
+    <div class="toolbox-tools">
+      <div v-for="tool in tools" :class="['toolbox-tools-item', tool.icon, selectedTool == tool.id ? 'active' : '']"
+           :key=tool.id @click="onToolSelected(tool.id)" :title="tool.title"></div>
     </div>
+    <div class="toolbox-options">
+      <div v-if="selectedTool == 'brush'">
+          <div></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,8 +44,7 @@ export default {
     },
     methods: {
         onToolSelected(selectedTool) {
-            // this.selectedTool = selectedTool;
-          this.$emit('toolChanged', selectedTool);
+            this.$emit('toolChanged', selectedTool);
         }
     }
 }
@@ -46,71 +52,73 @@ export default {
 
 <style lang="less">
 .toolbox {
-    display: flex;
-    flex-flow: wrap;
-    &-tool {
-        width: 20px;
-        height: 20px;
-        border-top: 1.5px solid white;
-        border-left: 1.5px solid white;
-        border-bottom: 1.5px solid black;
-        border-right: 1.5px solid black;
-
-        background-repeat: no-repeat;
-        background-position: center;
-        cursor: pointer;
-        &.active {
-            // background: #ffe78b42;
-            border: 1px inset white;
+    &-tools {
+        display: flex;
+        flex-flow: wrap;
+        &-item {
+            width: 20px;
+            height: 20px;
+            border-top: 1.5px solid white;
+            border-left: 1.5px solid white;
+            border-bottom: 1.5px solid black;
+            border-right: 1.5px solid black;
+            cursor: pointer;
+            &.active {
+                border: 1px inset white;
+            }
         }
     }
+    &-options {
+        height: 50px;
+        border: 2px inset;
+    }
     .free-select {
-        background-image: url(/src/assets/tools/freeselect.png);
+        background: no-repeat center url(/src/assets/tools/freeselect.png);
     }
     .select {
-        background-image: url(/src/assets/tools/select.png);
+        background: no-repeat center url(/src/assets/tools/select.png);
     }
     .eraser {
-        background-image: url(/src/assets/tools/eraser.png);
+        background: no-repeat center url(/src/assets/tools/eraser.png);
     }
     .magnifier {
-        background-image: url(/src/assets/tools/zoom.png);
+        background: no-repeat center url(/src/assets/tools/zoom.png);
     }
     .pick {
-        background-image: url(/src/assets/tools/pick.png);
+        background: no-repeat center url(/src/assets/tools/pick.png);
     }
     .fill {
-        background-image: url(/src/assets/tools/fill.png);
+        background: no-repeat center url(/src/assets/tools/fill.png);
     }
     .pencil {
-        background-image: url(/src/assets/tools/pen.png);
+        background: no-repeat center url(/src/assets/tools/pen.png);
     }
     .airbrush {
-        background-image: url(/src/assets/tools/airbrush.png);
+        background: no-repeat center url(/src/assets/tools/airbrush.png);
     }
     .brush {
-        background-image: url(/src/assets/tools/brush.png);
+        background: no-repeat center url(/src/assets/tools/brush.png);
     }
     .text {
-        background-image: url(/src/assets/tools/text.png);
+        background: no-repeat center url(/src/assets/tools/text.png);
     }
     .line {
-        background-image: url(/src/assets/tools/line.png);
+        background: no-repeat center url(/src/assets/tools/line.png);
     }
     .curve {
-        background-image: url(/src/assets/tools/curve.png);
+        background: no-repeat center url(/src/assets/tools/curve.png);
     }
     .rect {
-        background-image: url(/src/assets/tools/rect.png);
+        background: no-repeat center url(/src/assets/tools/rect.png);
     }
     .polygon {
-        background-image: url(/src/assets/tools/polygon.png);
+        background: no-repeat center url(/src/assets/tools/polygon.png);
     }
     .rounded-rect {
-        background-image: url(/src/assets/tools/rounded.png);
+        background: no-repeat center url(/src/assets/tools/rounded.png);
     }
     .ellipse {
-        background-image: url(/src/assets/tools/ellipsis.png);
+        background: no-repeat center url(/src/assets/tools/ellipsis.png);
     }
 }
 </style>

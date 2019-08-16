@@ -4,13 +4,13 @@
             <div class="paint-title-icon"></div>
             <div>untitled - Paint</div>
         </div>
-        <Menu />
+        <Menu @menuClick="onMenuClick"/>
         <div class="paint-content">
             <div class="paint-leftbar">
                 <Toolbox :selectedTool="tool" @toolChanged="onToolChanged"/>
             </div>
             <div class="paint-canvas">
-                <Canvas :tool="tool" :color="color" :lineWidth="lineWidth" />
+                <Canvas ref="canvas" :tool="tool" :color="color" :lineWidth="lineWidth" />
             </div>
         </div>
         <div class="paint-bottompanel">
@@ -56,6 +56,16 @@ export default {
         },
         onColorChanged(newColor) {
             this.color = newColor;
+        },
+        onMenuClick(menuId) {
+            console.log('selectedMenu:  ' + menuId);
+            switch (menuId) {
+                case 'clear':
+                    this.$refs.canvas.clearCanvas();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
@@ -76,8 +86,7 @@ export default {
         color: white;
         background: #000080;
         &-icon {
-            background-image: url(/src/assets/logopng.png);
-            background-repeat: no-repeat;
+            background: url(/src/assets/logopng.png) no-repeat;
             width: 16px;
             margin: 0 4px;
             background-size: 16px 16px;
