@@ -1,6 +1,6 @@
 # paint
 
-> A Vue.js project
+В целях изучения Vue решила сделать проект - программу paint из версии Windows 2000
 
 ## Build Setup
 
