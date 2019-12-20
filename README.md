@@ -2,6 +2,8 @@
 
 В целях изучения Vue решила сделать проект - программу paint из версии Windows 2000
 
+![Иллюстрация к проекту](https://github.com/helmetica/paint2000/raw/tools-to-object/screen.jpg)
+
 ## Build Setup
 
 ``` bash
