@@ -7,10 +7,10 @@
         <Menu @menuClick="onMenuClick"/>
         <div class="paint-content">
             <div class="paint-leftbar">
-                <Toolbox :selectedTool="tool" @toolChanged="onToolChanged"/>
+                <Toolbox :tools="tools" :selectedTool="selectedTool" @toolChanged="onToolChanged"/>
             </div>
             <div class="paint-canvas">
-                <Canvas ref="canvas" :tool="tool" :color="color" :lineWidth="lineWidth" />
+                <Canvas ref="canvas" :tool="selectedTool" :color="color" :lineWidth="lineWidth" />
             </div>
         </div>
         <div class="paint-bottompanel">
@@ -25,11 +25,47 @@ import Menu from './Menu.vue'
 import Toolbox from './Toolbox.vue'
 import Canvas from './Canvas.vue'
 import ColorBox from './ColorBox.vue'
+import {
+  FreeSelect,
+  Select,
+  Eraser,
+  Fill,
+  Pick,
+  Magnifier,
+  Pencil,
+  Brush,
+  Airbrush,
+  Text,
+  Line,
+  Curve,
+  Rect,
+  Polygon,
+  Ellipse,
+  RoundedRect
+} from './Tool.js'
 
 export default {
     data() {
         return {
-            tool: 'pencil',
+            tools: [
+              new FreeSelect('free-select', 'Free-Form Select'),
+              new Select('select', 'Select'),
+              new Eraser('eraser', 'Eraser/Color Eraser'),
+              new Fill('fill', 'Fill With Color'),
+              new Pick('pick', 'Pick Color'),
+              new Magnifier('magnifier', 'Magnifier'),
+              new Pencil('pencil', 'Pencil'),
+              new Brush('brush', 'Brush'),
+              new Airbrush('airbrush', 'Airbrush'),
+              new Text('text', 'Text'),
+              new Line('line', 'Line'),
+              new Curve('curve', 'Curve'),
+              new Rect('rect', 'Rectangle'),
+              new Polygon('polygon', 'Polygon'),
+              new Ellipse('ellipse', 'Ellipse'),
+              new RoundedRect('rounded-rect', 'Rounded Rectangle')
+            ],
+            selectedTool: new Pencil('pencil', 'Pencil'),
             color: '#ff0080',
             lineWidth: 0.5
         }
@@ -42,14 +78,17 @@ export default {
     },
     methods: {
         onToolChanged(newTool) {
-            this.tool = newTool;
-            switch (newTool) {
+            this.selectedTool = newTool;
+            switch (newTool.name) {
                 case 'pencil':
                     this.lineWidth = 0.5;
                     break;
                 case 'brush':
                     this.lineWidth = 5;
                     break;
+                case 'rect':
+                  this.lineWidth = 2;
+                  break;
                 default:
                     break;
             }

@@ -1,14 +1,11 @@
 <template>
-    <canvas id="canvas" :class="[tool]"></canvas>
+    <canvas id="canvas" :class="[tool.name]"></canvas>
 </template>
 
 <script>
 export default {
     props: {
-        tool: {
-            type: String,
-            default: 'pencil'
-        },
+        tool: Object,
         color: {
             type: String,
             default: 'black'
@@ -26,29 +23,22 @@ export default {
     },
     methods: {
         startDrawing(e) {
-            // Начинаем рисовать
             this.isDrawing = true;
             this.context.strokeStyle = this.color;
             this.context.lineWidth = this.lineWidth;
-            // Создаем новый путь (с текущим цветом и толщиной линии)
             this.context.beginPath();
-            // Нажатием левой кнопки мыши помещаем "кисть" на холст
-            this.context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+
+            this.tool.start(e, canvas, this.context);
         },
         stopDrawing(e) {
+            this.tool.finish(e, canvas, this.context);
             this.context.closePath();
             this.isDrawing = false;
         },
         draw(e) {
             if (this.isDrawing === true)
             {
-                // Определяем текущие координаты указателя мыши
-                let x = e.pageX - canvas.offsetLeft;
-                let y = e.pageY - canvas.offsetTop;
-
-                // Рисуем линию до новой координаты
-                this.context.lineTo(x, y);
-                this.context.stroke();
+                this.tool.move(e, canvas, this.context);
             }
         },
         updateCanvas() {
