@@ -1,101 +1,51 @@
 <template>
-    <div class="paint">
-        <div class="paint-title">
-            <div class="paint-title-icon"></div>
-            <div>untitled - Paint</div>
-        </div>
-        <Menu @menuClick="onMenuClick"/>
-        <div class="paint-content">
-            <div class="paint-leftbar">
-                <Toolbox :tools="tools" :selectedTool="selectedTool" @toolChanged="onToolChanged"/>
-            </div>
-            <div class="paint-canvas">
-                <Canvas ref="canvas" :tool="selectedTool" :color="color" :lineWidth="lineWidth" />
-            </div>
-        </div>
-        <div class="paint-bottompanel">
-            <ColorBox :selectedColor="color" @colorChanged="onColorChanged" />
-        </div>
-        <div class="paint-statusbar"></div>
+  <div class="paint">
+    <div class="paint-title">
+      <div class="paint-title-icon"></div>
+      <div>untitled - Paint</div>
     </div>
+    <menu-bar @menuClick="onMenuClick"/>
+    <div class="paint-content">
+      <div class="paint-leftbar">
+        <tool-box v-model="selectedTool"/>
+      </div>
+      <div class="paint-canvas">
+        <canvas-area
+          ref="canvas"
+          :tool="selectedTool"
+          :color="color"
+          :lineWidth="lineWidth"
+        />
+      </div>
+    </div>
+    <div class="paint-bottompanel">
+      <color-box v-model="color"/>
+    </div>
+    <div class="paint-statusbar"></div>
+  </div>
 </template>
 
 <script>
-import Menu from './Menu.vue'
-import Toolbox from './Toolbox.vue'
-import Canvas from './Canvas.vue'
+import MenuBar from './MenuBar.vue'
+import ToolBox from './ToolBox.vue'
+import CanvasArea from './CanvasArea.vue'
 import ColorBox from './ColorBox.vue'
-import {
-  FreeSelect,
-  Select,
-  Eraser,
-  Fill,
-  Pick,
-  Magnifier,
-  Pencil,
-  Brush,
-  Airbrush,
-  Text,
-  Line,
-  Curve,
-  Rect,
-  Polygon,
-  Ellipse,
-  RoundedRect
-} from './Tool.js'
 
 export default {
     data() {
         return {
-            tools: [
-              new FreeSelect('free-select', 'Free-Form Select'),
-              new Select('select', 'Select'),
-              new Eraser('eraser', 'Eraser/Color Eraser'),
-              new Fill('fill', 'Fill With Color'),
-              new Pick('pick', 'Pick Color'),
-              new Magnifier('magnifier', 'Magnifier'),
-              new Pencil('pencil', 'Pencil'),
-              new Brush('brush', 'Brush'),
-              new Airbrush('airbrush', 'Airbrush'),
-              new Text('text', 'Text'),
-              new Line('line', 'Line'),
-              new Curve('curve', 'Curve'),
-              new Rect('rect', 'Rectangle'),
-              new Polygon('polygon', 'Polygon'),
-              new Ellipse('ellipse', 'Ellipse'),
-              new RoundedRect('rounded-rect', 'Rounded Rectangle')
-            ],
-            selectedTool: new Pencil('pencil', 'Pencil'),
+            selectedTool: null,
             color: '#ff0080',
             lineWidth: 0.5
         }
     },
     components: {
-        Menu,
-        Toolbox,
-        Canvas,
+        MenuBar,
+        ToolBox,
+        CanvasArea,
         ColorBox
     },
     methods: {
-        onToolChanged(newTool) {
-            this.selectedTool = newTool;
-            switch (newTool.name) {
-                case 'pencil':
-                    this.lineWidth = 0.5;
-                    break;
-                case 'brush':
-                    this.lineWidth = 5;
-                    break;
-                case 'rect':
-                  this.lineWidth = 2;
-                  break;
-                default:
-                    break;
-            }
-        },
-        onColorChanged(newColor) {
-            this.color = newColor;
-        },
         onMenuClick(menuId) {
             console.log('selectedMenu:  ' + menuId);
             switch (menuId) {

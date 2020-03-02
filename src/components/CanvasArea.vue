@@ -1,11 +1,14 @@
 <template>
-    <canvas id="canvas" :class="[tool.name]"></canvas>
+    <canvas id="canvas" :class="cursorClass"></canvas>
 </template>
 
 <script>
 export default {
     props: {
-        tool: Object,
+        tool: {
+            type: Object,
+            default: null
+        },
         color: {
             type: String,
             default: 'black'
@@ -19,6 +22,11 @@ export default {
         return {
             context: null,
             isDrawing: false
+        }
+    },
+    computed: {
+        cursorClass() {
+            return this.tool && this.tool.name;
         }
     },
     methods: {

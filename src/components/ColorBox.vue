@@ -1,9 +1,19 @@
 <template>
     <div class="colorbox">
-        <div class="colorbox-selector" :style="{ background: selectedColor }"></div>
+        <div
+          class="colorbox-selector"
+          :style="{ background: this.value }"
+        >
+        </div>
         <div class="colorbox-colors">
-            <div class="colorbox-colors-item" v-for="color in colors" :key="color" @click="onItemClick(color)"
-            :style="{ background: color }"></div>
+            <div
+              v-for="color in colors"
+              :key="color"
+              :style="{ background: color }"
+              class="colorbox-colors-item"
+              @click="onItemClick(color)"
+            >
+            </div>
         </div>
     </div>
 </template>
@@ -11,13 +21,14 @@
 <script>
 export default {
     props: {
-        selectedColor: {
+        value: {
             type: String,
             default: '#000000'
-        }
+        },
     },
     data() {
         return {
+            localValue: this.value || '#000000',
             colors: [
                 '#000000', '#808080', '#820000', '#837e00', '#008000', '#008080',
                 '#000080', '#800080', '#808040', '#004040', '#0080ff', '#023f83',
@@ -29,8 +40,7 @@ export default {
     },
     methods: {
         onItemClick(color) {
-            // this.selectedColor = color;
-            this.$emit('colorChanged', color);
+            this.$emit('input', color);
         }
     }
 }
