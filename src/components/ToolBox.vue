@@ -4,28 +4,24 @@
       <div
         v-for="tool in tools"
         :key="tool.name"
-        :class="[ 'toolbox-tools-item', tool.icon, (selectedTool.name === tool.name) ? 'active' : '']"
+        :class="[ 'toolbox-tools-item', tool.icon, (value.name === tool.name) ? 'active' : '']"
         :title="tool.title"
         @click="onToolSelected(tool)"
       >
       </div>
     </div>
-    <div class="toolbox-options">
-      <div v-if="selectedTool.name === 'brush'">
-        <div></div>
-      </div>
-    </div>
+    <div class="toolbox-options"></div>
   </div>
 </template>
 
 <script>
-import * as Tools from '../Tools.js'
+import * as Tools from '../Tools.js';
 
 export default {
     props: {
       value: {
           type: Object,
-          default: () => new Tools.Pencil()
+          default: () => new Tools.Pencil(),
       },
     },
     data() {
@@ -46,22 +42,15 @@ export default {
                 new Tools.Rect(),
                 new Tools.Polygon(),
                 new Tools.Ellipse(),
-                new Tools.RoundedRect()
+                new Tools.RoundedRect(),
             ],
-            selectedTool: this.value
         }
     },
     methods: {
-        onToolSelected(selectedTool) {
-            this.$emit('toolChanged', selectedTool);
+        onToolSelected(newValue) {
+            this.$emit('input', newValue);
         }
     },
-    created() {
-        this.selectedTool = new Tools.Pencil();
-    },
-    mounted() {
-        this.$emit('input');
-    }
 }
 </script>
 

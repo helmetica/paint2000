@@ -4,46 +4,56 @@
       <div class="paint-title-icon"></div>
       <div>untitled - Paint</div>
     </div>
+
     <menu-bar @menuClick="onMenuClick"/>
+
     <div class="paint-content">
       <div class="paint-leftbar">
-        <tool-box v-model="selectedTool"/>
+        <tool-box v-model="tool"/>
       </div>
       <div class="paint-canvas">
         <canvas-area
           ref="canvas"
-          :tool="selectedTool"
+          :tool="tool"
           :color="color"
           :lineWidth="lineWidth"
         />
       </div>
     </div>
+
     <div class="paint-bottompanel">
       <color-box v-model="color"/>
     </div>
+
     <div class="paint-statusbar"></div>
   </div>
 </template>
 
 <script>
-import MenuBar from './MenuBar.vue'
-import ToolBox from './ToolBox.vue'
-import CanvasArea from './CanvasArea.vue'
-import ColorBox from './ColorBox.vue'
+import MenuBar from './MenuBar.vue';
+import ToolBox from './ToolBox.vue';
+import CanvasArea from './CanvasArea.vue';
+import ColorBox from './ColorBox.vue';
+import * as Tools from '../Tools.js';
+import { colors } from '../utils/constants';
 
 export default {
     data() {
         return {
-            selectedTool: null,
-            color: '#ff0080',
-            lineWidth: 0.5
+            tool: new Tools.Pencil(),
+            color: colors[0],
         }
     },
     components: {
         MenuBar,
         ToolBox,
         CanvasArea,
-        ColorBox
+        ColorBox,
+    },
+    computed: {
+        lineWidth() {
+            return this.tool && this.tool.lineWidth || 0.5;
+        },
     },
     methods: {
         onMenuClick(menuId) {
@@ -64,8 +74,8 @@ export default {
 .paint {
     display: flex;
     flex-direction: column;
-    height: 420px;
-    width: 640px;
+    height: 550px;
+    width: 900px;
     padding: 3px;
     background: #c0c0c0;
     border: 2px outset white;
