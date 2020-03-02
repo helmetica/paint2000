@@ -1,101 +1,61 @@
 <template>
-    <div class="paint">
-        <div class="paint-title">
-            <div class="paint-title-icon"></div>
-            <div>untitled - Paint</div>
-        </div>
-        <Menu @menuClick="onMenuClick"/>
-        <div class="paint-content">
-            <div class="paint-leftbar">
-                <Toolbox :tools="tools" :selectedTool="selectedTool" @toolChanged="onToolChanged"/>
-            </div>
-            <div class="paint-canvas">
-                <Canvas ref="canvas" :tool="selectedTool" :color="color" :lineWidth="lineWidth" />
-            </div>
-        </div>
-        <div class="paint-bottompanel">
-            <ColorBox :selectedColor="color" @colorChanged="onColorChanged" />
-        </div>
-        <div class="paint-statusbar"></div>
+  <div class="paint">
+    <div class="paint-title">
+      <div class="paint-title-icon"></div>
+      <div>untitled - Paint</div>
     </div>
+
+    <menu-bar @menuClick="onMenuClick"/>
+
+    <div class="paint-content">
+      <div class="paint-leftbar">
+        <tool-box v-model="tool"/>
+      </div>
+      <div class="paint-canvas">
+        <canvas-area
+          ref="canvas"
+          :tool="tool"
+          :color="color"
+          :lineWidth="lineWidth"
+        />
+      </div>
+    </div>
+
+    <div class="paint-bottompanel">
+      <color-box v-model="color"/>
+    </div>
+
+    <div class="paint-statusbar"></div>
+  </div>
 </template>
 
 <script>
-import Menu from './Menu.vue'
-import Toolbox from './Toolbox.vue'
-import Canvas from './Canvas.vue'
-import ColorBox from './ColorBox.vue'
-import {
-  FreeSelect,
-  Select,
-  Eraser,
-  Fill,
-  Pick,
-  Magnifier,
-  Pencil,
-  Brush,
-  Airbrush,
-  Text,
-  Line,
-  Curve,
-  Rect,
-  Polygon,
-  Ellipse,
-  RoundedRect
-} from './Tool.js'
+import MenuBar from './MenuBar.vue';
+import ToolBox from './ToolBox.vue';
+import CanvasArea from './CanvasArea.vue';
+import ColorBox from './ColorBox.vue';
+import * as Tools from '../Tools.js';
+import { colors } from '../utils/constants';
 
 export default {
     data() {
         return {
-            tools: [
-              new FreeSelect('free-select', 'Free-Form Select'),
-              new Select('select', 'Select'),
-              new Eraser('eraser', 'Eraser/Color Eraser'),
-              new Fill('fill', 'Fill With Color'),
-              new Pick('pick', 'Pick Color'),
-              new Magnifier('magnifier', 'Magnifier'),
-              new Pencil('pencil', 'Pencil'),
-              new Brush('brush', 'Brush'),
-              new Airbrush('airbrush', 'Airbrush'),
-              new Text('text', 'Text'),
-              new Line('line', 'Line'),
-              new Curve('curve', 'Curve'),
-              new Rect('rect', 'Rectangle'),
-              new Polygon('polygon', 'Polygon'),
-              new Ellipse('ellipse', 'Ellipse'),
-              new RoundedRect('rounded-rect', 'Rounded Rectangle')
-            ],
-            selectedTool: new Pencil('pencil', 'Pencil'),
-            color: '#ff0080',
-            lineWidth: 0.5
+            tool: new Tools.Pencil(),
+            color: colors[0],
         }
     },
     components: {
-        Menu,
-        Toolbox,
-        Canvas,
-        ColorBox
+        MenuBar,
+        ToolBox,
+        CanvasArea,
+        ColorBox,
+    },
+    computed: {
+        lineWidth() {
+            return this.tool && this.tool.lineWidth || 0.5;
+        },
     },
     methods: {
-        onToolChanged(newTool) {
-            this.selectedTool = newTool;
-            switch (newTool.name) {
-                case 'pencil':
-                    this.lineWidth = 0.5;
-                    break;
-                case 'brush':
-                    this.lineWidth = 5;
-                    break;
-                case 'rect':
-                  this.lineWidth = 2;
-                  break;
-                default:
-                    break;
-            }
-        },
-        onColorChanged(newColor) {
-            this.color = newColor;
-        },
         onMenuClick(menuId) {
             console.log('selectedMenu:  ' + menuId);
             switch (menuId) {
@@ -114,8 +74,8 @@ export default {
 .paint {
     display: flex;
     flex-direction: column;
-    height: 420px;
-    width: 640px;
+    height: 550px;
+    width: 900px;
     padding: 3px;
     background: #c0c0c0;
     border: 2px outset white;

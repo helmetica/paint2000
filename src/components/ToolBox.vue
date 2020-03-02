@@ -1,53 +1,56 @@
 <template>
   <div class="toolbox">
     <div class="toolbox-tools">
-      <div v-for="tool in tools" :class="['toolbox-tools-item', tool.icon, (selectedTool.name === tool.name) ? 'active' : '']"
-           :key=tool.name @click="onToolSelected(tool)" :title="tool.title"></div>
-    </div>
-    <div class="toolbox-options">
-      <div v-if="selectedTool.name === 'brush'">
-          <div></div>
+      <div
+        v-for="tool in tools"
+        :key="tool.name"
+        :class="[ 'toolbox-tools-item', tool.icon, (value.name === tool.name) ? 'active' : '']"
+        :title="tool.title"
+        @click="onToolSelected(tool)"
+      >
       </div>
     </div>
+    <div class="toolbox-options"></div>
   </div>
 </template>
 
 <script>
+import * as Tools from '../Tools.js';
+
 export default {
     props: {
-      tools: {
-        type: Array,
-        default: []
+      value: {
+          type: Object,
+          default: () => new Tools.Pencil(),
       },
-      selectedTool: Object
     },
     data() {
         return {
-            // tools: [
-            //     {id: 'free_select', icon: 'free-select', title: 'Free-Form Select'},
-            //     {id: 'select', icon: 'select', title: 'Select'},
-            //     {id: 'eraser', icon: 'eraser', title: 'Eraser/Color Eraser'},
-            //     {id: 'fill', icon: 'fill', title: 'Fill With Color'},
-            //     {id: 'pick', icon: 'pick', title: 'Pick Color'},
-            //     {id: 'magnifier', icon: 'magnifier', title: 'Magnifier'},
-            //     {id: 'pencil', icon: 'pencil', title: 'Pencil'},
-            //     {id: 'brush', icon: 'brush', title: 'Brush'},
-            //     {id: 'airbrush', icon: 'airbrush', title: 'Airbrush'},
-            //     {id: 'text', icon: 'text', title: 'Text'},
-            //     {id: 'line', icon: 'line', title: 'Line'},
-            //     {id: 'curve', icon: 'curve', title: 'Curve'},
-            //     {id: 'rect', icon: 'rect', title: 'Rectangle'},
-            //     {id: 'polygon', icon: 'polygon', title: 'Pilygon'},
-            //     {id: 'ellipse', icon: 'ellipse', title: 'Ellipse'},
-            //     {id: 'rounded_rect', icon: 'rounded-rect', title: 'Rounded Rectangle'}
-            // ]
+            tools: [
+                new Tools.FreeSelect(),
+                new Tools.Select(),
+                new Tools.Eraser(),
+                new Tools.Fill(),
+                new Tools.Pick(),
+                new Tools.Magnifier(),
+                new Tools.Pencil(),
+                new Tools.Brush(),
+                new Tools.Airbrush(),
+                new Tools.Text(),
+                new Tools.Line(),
+                new Tools.Curve(),
+                new Tools.Rect(),
+                new Tools.Polygon(),
+                new Tools.Ellipse(),
+                new Tools.RoundedRect(),
+            ],
         }
     },
     methods: {
-        onToolSelected(selectedTool) {
-            this.$emit('toolChanged', selectedTool);
+        onToolSelected(newValue) {
+            this.$emit('input', newValue);
         }
-    }
+    },
 }
 </script>
 

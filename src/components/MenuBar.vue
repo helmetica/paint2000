@@ -1,9 +1,12 @@
 <template>
     <div class="menu">
         <div class="menu-item" v-for="menuItem in menuItems" :key="menuItem.id">
-            <div @click="onMenuItemClick(menuItem.id)">{{menuItem.title}}</div>
-            <MenuDropdown :class="['menu-item-dropdown', activeMenu == menuItem.id ? 'active' : '']"
-                        :items="menuItem.submenuItems" @itemClick="onDropdowmMenuItemClick" />
+            <div @click="onMenuItemClick(menuItem.id)">{{ menuItem.title }}</div>
+            <menu-dropdown
+              :class="['menu-item-dropdown', activeMenu == menuItem.id ? 'active' : '']"
+              :items="menuItem.submenuItems"
+              @itemClick="onDropdownMenuItemClick"
+            />
         </div>
     </div>
 </template>
@@ -72,7 +75,7 @@ export default {
         onMenuItemClick(activeMenu) {
             this.activeMenu = this.activeMenu === activeMenu ? null : activeMenu;
         },
-        onDropdowmMenuItemClick(dropdownMenuId) {
+        onDropdownMenuItemClick(dropdownMenuId) {
             this.$emit('menuClick', dropdownMenuId);
         }
     }

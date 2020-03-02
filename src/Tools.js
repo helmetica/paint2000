@@ -3,6 +3,7 @@
 class Tool {
     constructor(name) {
         this.name = name;
+        this.lineWidth = 0.5;
 
         this.x = 0;
         this.y = 0;
@@ -16,10 +17,10 @@ class Tool {
 }
 
 export class Pencil extends Tool {
-    constructor(icon, title) {
+    constructor() {
         super('pencil');
-        this.icon = icon;
-        this.title = title;
+        this.icon = 'pencil';
+        this.title = 'Pencil';
     }
 
     start(e, canvas, context) {
@@ -42,11 +43,11 @@ export class Pencil extends Tool {
 }
 
 export class FreeSelect extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('free_select');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'free-select';
+    this.title = 'Free-Form Select';
   }
 
   start(e, canvas, context) {
@@ -66,8 +67,8 @@ export class Select extends Tool {
   constructor(icon, title) {
     super('select');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'select';
+    this.title = 'Select';
   }
 
   start(e, canvas, context) {
@@ -84,11 +85,11 @@ export class Select extends Tool {
 }
 
 export class Eraser extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('eraser');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'eraser';
+    this.title = 'Eraser/Color Eraser';
   }
 
   start(e, canvas, context) {
@@ -108,8 +109,8 @@ export class Fill extends Tool {
   constructor(icon, title) {
     super('fill');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'fill';
+    this.title = 'Fill With Color';
   }
 
   start(e, canvas, context) {
@@ -126,11 +127,11 @@ export class Fill extends Tool {
 }
 
 export class Pick extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('pick');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'pick';
+    this.title = 'Pick Color';
   }
 
   start(e, canvas, context) {
@@ -147,11 +148,11 @@ export class Pick extends Tool {
 }
 
 export class Magnifier extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('magnifier');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'magnifier';
+    this.title = 'Magnifier';
   }
 
   start(e, canvas, context) {
@@ -168,11 +169,12 @@ export class Magnifier extends Tool {
 }
 
 export class Brush extends Tool {
-    constructor(icon, title) {
+    constructor() {
         super('brush');
 
-        this.icon = icon;
-        this.title = title;
+        this.icon = 'brush';
+        this.title = 'Brush';
+        this.lineWidth = 5;
     }
 
     start(e, canvas, context) {
@@ -195,11 +197,11 @@ export class Brush extends Tool {
 }
 
 export class Airbrush extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('airbrush');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'airbrush';
+    this.title = 'Airbrush';
   }
 
   start(e, canvas, context) {
@@ -216,11 +218,11 @@ export class Airbrush extends Tool {
 }
 
 export class Text extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('text');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'text';
+    this.title = 'Text';
   }
 
   start(e, canvas, context) {
@@ -237,11 +239,11 @@ export class Text extends Tool {
 }
 
 export class Line extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('line');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'line';
+    this.title = 'Line';
   }
 
   start(e, canvas, context) {
@@ -258,11 +260,11 @@ export class Line extends Tool {
 }
 
 export class Curve extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('curve');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'curve';
+    this.title = 'Curve';
   }
 
   start(e, canvas, context) {
@@ -279,11 +281,12 @@ export class Curve extends Tool {
 }
 
 export class Rect extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('rect');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'rect';
+    this.title = 'Rectangle';
+    this.lineWidth = 2;
   }
 
   start(e, canvas, context) {
@@ -312,11 +315,11 @@ export class Rect extends Tool {
 }
 
 export class Polygon extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('polygon');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'polygon';
+    this.title = 'Polygon';
   }
 
   start(e, canvas, context) {
@@ -333,11 +336,11 @@ export class Polygon extends Tool {
 }
 
 export class Ellipse extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('ellipse');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'ellipse';
+    this.title = 'Ellipse';
   }
 
   start(e, canvas, context) {
@@ -354,11 +357,11 @@ export class Ellipse extends Tool {
 }
 
 export class RoundedRect extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('rounded_rect');
 
-    this.icon = icon;
-    this.title = title;
+    this.icon = 'rounded-rect';
+    this.title = 'Rounded Rectangle';
   }
 
   start(e, canvas, context) {
