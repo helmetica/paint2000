@@ -8,11 +8,12 @@
       <div
         @click="onMenuItemClick(menuItem.id)"
         @mouseover="onMouseOver(menuItem.id)"
+        :class="['menu-item-title', { active: activeMenu === menuItem.id }]"
       >
         {{ menuItem.title }}
       </div>
       <menu-dropdown
-        :class="['menu-item-dropdown', { active: activeMenu === menuItem.id }]"
+        :class="['menu-dropdown', { active: activeMenu === menuItem.id }]"
         :items="menuItem.submenuItems"
         @itemClick="onDropdownMenuItemClick"
       />
@@ -124,18 +125,27 @@ export default {
 
 <style lang="less">
 .menu {
-    display: flex;
-    height: 20px;
-    align-items: center;
-    &-item {
-        cursor: pointer;
-        margin-right: 6px;
-        &-dropdown {
-            display: none;
-            &.active {
-                display: unset;
-            }
-        }
+  display: flex;
+  height: 20px;
+  align-items: center;
+
+  &-item {
+    cursor: pointer;
+
+    &-title {
+      padding: 0 4px;
+      &.active {
+        border: 1px inset white;
+      }
     }
+  }
+
+  &-dropdown {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 }
 </style>

@@ -1,12 +1,17 @@
 <template>
-    <div v-if="items.length" class="menu-dropdown">
-        <div class="menu-dropdown-item"
-            v-for="item in items"
-            :key="item.id"
-            @click="onItemClick(item.id)">
-                {{ item.title }}
-        </div>
+  <div
+    v-if="items.length"
+    class="menu-dropdown"
+  >
+    <div
+      v-for="item in items"
+      :key="item.id"
+      class="menu-dropdown-item"
+      @click="onItemClick(item.id)"
+    >
+      {{ item.title }}
     </div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +21,6 @@ export default {
   },
   methods: {
     onItemClick(id) {
-      console.log(id);
       this.$emit('itemClick', id);
     },
   },
@@ -25,11 +29,15 @@ export default {
 
 <style lang="less">
 .menu-dropdown {
-    position: absolute;
-    background: #c0c0c0;
-    width: 200px;
-    &-item {
-        cursor: pointer;
+  position: absolute;
+  background: #c0c0c0;
+
+  &-item {
+    padding: 2px 24px;
+    cursor: pointer;
+    &:hover {
+      background-color: #000080;
     }
+  }
 }
 </style>
