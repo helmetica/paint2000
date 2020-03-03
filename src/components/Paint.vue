@@ -38,36 +38,36 @@ import * as Tools from '../Tools.js';
 import { colors } from '../utils/constants';
 
 export default {
-    data() {
-        return {
-            tool: new Tools.Pencil(),
-            color: colors[0],
-        }
+  data() {
+    return {
+      tool: new Tools.Pencil(),
+      color: colors[0],
+    };
+  },
+  components: {
+    MenuBar,
+    ToolBox,
+    CanvasArea,
+    ColorBox,
+  },
+  computed: {
+    lineWidth() {
+      return this.tool && this.tool.lineWidth || 0.5;
     },
-    components: {
-        MenuBar,
-        ToolBox,
-        CanvasArea,
-        ColorBox,
+  },
+  methods: {
+    onMenuClick(menuId) {
+      console.log(`selectedMenu:  ${menuId}`);
+      switch (menuId) {
+        case 'clear':
+          this.$refs.canvas.clearCanvas();
+          break;
+        default:
+          break;
+      }
     },
-    computed: {
-        lineWidth() {
-            return this.tool && this.tool.lineWidth || 0.5;
-        },
-    },
-    methods: {
-        onMenuClick(menuId) {
-            console.log('selectedMenu:  ' + menuId);
-            switch (menuId) {
-                case 'clear':
-                    this.$refs.canvas.clearCanvas();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="less">
