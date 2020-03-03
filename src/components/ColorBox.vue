@@ -22,24 +22,24 @@
 import { colors } from '../utils/constants';
 
 export default {
-    props: {
-        value: {
-            type: String,
-            default: colors[0],
-        },
+  props: {
+    value: {
+      type: String,
+      default: colors[0],
     },
-    data() {
-        return {
-            localValue: this.value,
-            colors,
-        }
+  },
+  data() {
+    return {
+      localValue: this.value,
+      colors,
+    };
+  },
+  methods: {
+    onItemClick(color) {
+      this.$emit('input', color);
     },
-    methods: {
-        onItemClick(color) {
-            this.$emit('input', color);
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="less">

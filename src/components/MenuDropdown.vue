@@ -11,16 +11,16 @@
 
 <script>
 export default {
-    props: {
-        items: Array
+  props: {
+    items: Array,
+  },
+  methods: {
+    onItemClick(id) {
+      console.log(id);
+      this.$emit('itemClick', id);
     },
-    methods: {
-        onItemClick(id) {
-            console.log(id);
-            this.$emit('itemClick', id);
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="less">

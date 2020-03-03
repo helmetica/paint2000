@@ -1,45 +1,44 @@
-'use strict';
-
+/* eslint-disable */
 class Tool {
-    constructor(name) {
-        this.name = name;
-        this.lineWidth = 0.5;
+  constructor(name) {
+    this.name = name;
+    this.lineWidth = 0.5;
 
-        this.x = 0;
-        this.y = 0;
+    this.x = 0;
+    this.y = 0;
 
-        this.x1 = 0;
-        this.y1 = 0;
+    this.x1 = 0;
+    this.y1 = 0;
 
-        this.x2 = 0;
-        this.y2 = 0;
-    }
+    this.x2 = 0;
+    this.y2 = 0;
+  }
 }
 
 export class Pencil extends Tool {
-    constructor() {
-        super('pencil');
-        this.icon = 'pencil';
-        this.title = 'Pencil';
-    }
+  constructor() {
+    super('pencil');
+    this.icon = 'pencil';
+    this.title = 'Pencil';
+  }
 
-    start(e, canvas, context) {
-        this.x = e.pageX - canvas.offsetLeft;
-        this.y = e.pageY - canvas.offsetTop;
-        context.moveTo(this.x, this.y);
-    }
+  start(e, canvas, context) {
+    this.x = e.pageX - canvas.offsetLeft;
+    this.y = e.pageY - canvas.offsetTop;
+    context.moveTo(this.x, this.y);
+  }
 
-    move(e, canvas, context) {
-        this.x = e.pageX - canvas.offsetLeft;
-        this.y = e.pageY - canvas.offsetTop;
+  move(e, canvas, context) {
+    this.x = e.pageX - canvas.offsetLeft;
+    this.y = e.pageY - canvas.offsetTop;
 
-        context.lineTo(this.x, this.y);
-        context.stroke();
-    }
+    context.lineTo(this.x, this.y);
+    context.stroke();
+  }
 
-    finish() {
+  finish() {
 
-    }
+  }
 }
 
 export class FreeSelect extends Tool {
@@ -64,7 +63,7 @@ export class FreeSelect extends Tool {
 }
 
 export class Select extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('select');
 
     this.icon = 'select';
@@ -106,7 +105,7 @@ export class Eraser extends Tool {
 }
 
 export class Fill extends Tool {
-  constructor(icon, title) {
+  constructor() {
     super('fill');
 
     this.icon = 'fill';
@@ -169,31 +168,31 @@ export class Magnifier extends Tool {
 }
 
 export class Brush extends Tool {
-    constructor() {
-        super('brush');
+  constructor() {
+    super('brush');
 
-        this.icon = 'brush';
-        this.title = 'Brush';
-        this.lineWidth = 5;
-    }
+    this.icon = 'brush';
+    this.title = 'Brush';
+    this.lineWidth = 5;
+  }
 
-    start(e, canvas, context) {
-        this.x = e.pageX - canvas.offsetLeft;
-        this.y = e.pageY - canvas.offsetTop;
-        context.moveTo(this.x, this.y);
-    }
+  start(e, canvas, context) {
+    this.x = e.pageX - canvas.offsetLeft;
+    this.y = e.pageY - canvas.offsetTop;
+    context.moveTo(this.x, this.y);
+  }
 
-    move(e, canvas, context) {
-        this.x = e.pageX - canvas.offsetLeft;
-        this.y = e.pageY - canvas.offsetTop;
+  move(e, canvas, context) {
+    this.x = e.pageX - canvas.offsetLeft;
+    this.y = e.pageY - canvas.offsetTop;
 
-        context.lineTo(this.x, this.y);
-        context.stroke();
-    }
+    context.lineTo(this.x, this.y);
+    context.stroke();
+  }
 
-    finish() {
+  finish() {
 
-    }
+  }
 }
 
 export class Airbrush extends Tool {

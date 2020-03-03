@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Paint from './components/Paint.vue'
+import Paint from './components/Paint.vue';
 
 export default {
-  components: { Paint }
-}
+  components: { Paint },
+};
 </script>
 
 <style>

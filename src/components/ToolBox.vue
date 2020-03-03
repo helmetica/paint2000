@@ -15,43 +15,43 @@
 </template>
 
 <script>
-import * as Tools from '../Tools.js';
+import * as Tools from '../Tools';
 
 export default {
-    props: {
-      value: {
-          type: Object,
-          default: () => new Tools.Pencil(),
-      },
+  props: {
+    value: {
+      type: Object,
+      default: () => new Tools.Pencil(),
     },
-    data() {
-        return {
-            tools: [
-                new Tools.FreeSelect(),
-                new Tools.Select(),
-                new Tools.Eraser(),
-                new Tools.Fill(),
-                new Tools.Pick(),
-                new Tools.Magnifier(),
-                new Tools.Pencil(),
-                new Tools.Brush(),
-                new Tools.Airbrush(),
-                new Tools.Text(),
-                new Tools.Line(),
-                new Tools.Curve(),
-                new Tools.Rect(),
-                new Tools.Polygon(),
-                new Tools.Ellipse(),
-                new Tools.RoundedRect(),
-            ],
-        }
+  },
+  data() {
+    return {
+      tools: [
+        new Tools.FreeSelect(),
+        new Tools.Select(),
+        new Tools.Eraser(),
+        new Tools.Fill(),
+        new Tools.Pick(),
+        new Tools.Magnifier(),
+        new Tools.Pencil(),
+        new Tools.Brush(),
+        new Tools.Airbrush(),
+        new Tools.Text(),
+        new Tools.Line(),
+        new Tools.Curve(),
+        new Tools.Rect(),
+        new Tools.Polygon(),
+        new Tools.Ellipse(),
+        new Tools.RoundedRect(),
+      ],
+    };
+  },
+  methods: {
+    onToolSelected(newValue) {
+      this.$emit('input', newValue);
     },
-    methods: {
-        onToolSelected(newValue) {
-            this.$emit('input', newValue);
-        }
-    },
-}
+  },
+};
 </script>
 
 <style lang="less">

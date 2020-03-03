@@ -3,78 +3,78 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
-    props: {
-        tool: {
-            type: Object,
-            default: null
-        },
-        color: {
-            type: String,
-            default: 'black'
-        },
-        lineWidth: {
-            type: Number,
-            default: 0.5
-        }
+  props: {
+    tool: {
+      type: Object,
+      default: null,
     },
-    data() {
-        return {
-            context: null,
-            isDrawing: false
-        }
+    color: {
+      type: String,
+      default: 'black',
     },
-    computed: {
-        cursorClass() {
-            return this.tool && this.tool.name;
-        }
+    lineWidth: {
+      type: Number,
+      default: 0.5,
     },
-    methods: {
-        startDrawing(e) {
-            this.isDrawing = true;
-            this.context.strokeStyle = this.color;
-            this.context.lineWidth = this.lineWidth;
-            this.context.beginPath();
+  },
+  data() {
+    return {
+      context: null,
+      isDrawing: false,
+    };
+  },
+  computed: {
+    cursorClass() {
+      return this.tool && this.tool.name;
+    },
+  },
+  methods: {
+    startDrawing(e) {
+      this.isDrawing = true;
+      this.context.strokeStyle = this.color;
+      this.context.lineWidth = this.lineWidth;
+      this.context.beginPath();
 
-            this.tool.start(e, canvas, this.context);
-        },
-        stopDrawing(e) {
-            this.tool.finish(e, canvas, this.context);
-            this.context.closePath();
-            this.isDrawing = false;
-        },
-        draw(e) {
-            if (this.isDrawing === true)
-            {
-                this.tool.move(e, canvas, this.context);
-            }
-        },
-        updateCanvas() {
-            this.context = canvas.getContext("2d");
-            this.context.strokeStyle = this.color;
-            this.context.lineWidth = this.lineWidth;
-
-            this.resize();
-
-            // Подключаем требуемые для рисования события
-            canvas.onmousedown = this.startDrawing;
-            canvas.onmouseup = this.stopDrawing;
-            canvas.onmouseout = this.stopDrawing;
-            canvas.onmousemove = this.draw;
-        },
-        resize() {
-            let rect = canvas.parentNode.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-        },
-        clearCanvas() {
-            this.context.clearRect(0, 0, canvas.width, canvas.height);
-        }
+      this.tool.start(e, canvas, this.context);
     },
-    mounted() {
-        this.updateCanvas();
-    }
-}
+    stopDrawing(e) {
+      this.tool.finish(e, canvas, this.context);
+      this.context.closePath();
+      this.isDrawing = false;
+    },
+    draw(e) {
+      if (this.isDrawing === true) {
+        this.tool.move(e, canvas, this.context);
+      }
+    },
+    updateCanvas() {
+      this.context = canvas.getContext('2d');
+      this.context.strokeStyle = this.color;
+      this.context.lineWidth = this.lineWidth;
+
+      this.resize();
+
+      // Подключаем требуемые для рисования события
+      canvas.onmousedown = this.startDrawing;
+      canvas.onmouseup = this.stopDrawing;
+      canvas.onmouseout = this.stopDrawing;
+      canvas.onmousemove = this.draw;
+    },
+    resize() {
+      const rect = canvas.parentNode.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    },
+    clearCanvas() {
+      this.context.clearRect(0, 0, canvas.width, canvas.height);
+    },
+  },
+  mounted() {
+    this.updateCanvas();
+  },
+};
 </script>
 
 <style lang="less">
