@@ -2,7 +2,7 @@
 
 В целях изучения Vue решила сделать проект - программу paint из версии Windows 2000. Статус проекта: в разработке
 
-![Иллюстрация к проекту](https://github.com/helmetica/paint2000/raw/master/screen.jpg)
+![Иллюстрация к проекту](https://github.com/helmetica/paint2000/raw/master/screen.png)
 
 ## Build Setup
 
